@@ -1,6 +1,8 @@
 # Encryption
-
-Write a one screen Flutter app that encrypts a user given text:
+1. clone this repo
+2. create a new branch `yourName-solution`
+3. Write a one screen Flutter app that encrypts a user given text 
+4. Submit a PR into master with your solution
 
 ![encrypt](flutter-code.png)
 
