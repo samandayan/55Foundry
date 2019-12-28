@@ -1,35 +1,29 @@
 package com.sam.a55foundry;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.*;
 import java.util.Base64;
 
 public class RSAKeyPairGenerator {
 
-    static KeyPairGenerator kpg;
+    private PrivateKey privateKey;
+    private PublicKey publicKey;
 
-    static {
-        try {
-            kpg = KeyPairGenerator.getInstance("RSA");
-            kpg.initialize(2048);
-        } catch (Exception e) {
-
-        }
+    public RSAKeyPairGenerator() throws NoSuchAlgorithmException {
+        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+        keyGen.initialize(1024);
+        KeyPair pair = keyGen.generateKeyPair();
+        this.privateKey = pair.getPrivate();
+        this.publicKey = pair.getPublic();
     }
 
-    private static KeyPair getKeyPair() {
-        return kpg.generateKeyPair();
+    public PrivateKey getPrivateKey() {
+        return privateKey;
     }
 
-    public static String getPublicKey() {
-        return Base64.getMimeEncoder().encodeToString(getKeyPair().getPublic().getEncoded());
-    }
-
-    public static String getPrivateKey() {
-        return Base64.getMimeEncoder().encodeToString(getKeyPair().getPrivate().getEncoded());
-    }
-
-    public static String getAlgorithm() {
-        return kpg.getAlgorithm();
+    public PublicKey getPublicKey() {
+        return publicKey;
     }
 }
