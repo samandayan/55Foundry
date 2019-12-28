@@ -39,8 +39,17 @@ public class RSAUtil {
         return pubKey;
     }
 
-    public static PrivateKey getPrivateKey(String base64PrivateKey){
-        return rsaKeyPairGenerator.getPrivateKey();
+    public static PrivateKey getPrivateKey(String base64PrivateKey) throws Exception{
+        String b64PrivateKey = Base64.getEncoder().encodeToString(rsaKeyPairGenerator.getPrivateKey().getEncoded());
+        byte[] privateBytes = Base64.getDecoder().decode(b64PrivateKey);
+
+
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateBytes);
+        KeyFactory kf = KeyFactory.getInstance("RSA");
+        PrivateKey privKey = kf.generatePrivate(keySpec);
+        Log.i("Cool", b64PrivateKey);
+
+        return privKey;
     }
 
     public static byte[] encrypt(String data, String publicKey) throws Exception {
@@ -55,7 +64,7 @@ public class RSAUtil {
         return new String(cipher.doFinal(data));
     }
 
-    public static String decrypt(String data, String base64PrivateKey) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+    public static String decrypt(String data, String base64PrivateKey) throws Exception {
         return decrypt(Base64.getDecoder().decode(data.getBytes()), getPrivateKey(base64PrivateKey));
     }
 
