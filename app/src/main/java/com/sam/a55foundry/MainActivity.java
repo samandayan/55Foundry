@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button generateKeyPair;
     EditText textViewer;
+    EditText text_to_encrypt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         generateKeyPair = findViewById(R.id.generate_key_pair);
         textViewer = findViewById(R.id.text_viewer);
+        text_to_encrypt = findViewById(R.id.text_to_encrypt);
 
         rsaUtil = new RSAUtil(this);
 
