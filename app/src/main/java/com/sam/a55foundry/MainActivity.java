@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            RSAUtil rsaUtil = new RSAUtil();
-           RSAUtil.main(null);
+            RSAUtil rsaUtil = new RSAUtil(this);
+            rsaUtil.main(null);
         } catch (Exception e) {
             Log.i("Error_Message", e.getMessage());
         }
