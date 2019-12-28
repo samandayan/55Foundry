@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,10 +14,16 @@ public class MainActivity extends AppCompatActivity {
 
     RSAUtil rsaUtil;
 
+    Button generateKeyPair;
+    EditText textViewer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        generateKeyPair = findViewById(R.id.generate_key_pair);
+        textViewer = findViewById(R.id.text_viewer);
 
         rsaUtil = new RSAUtil(this);
 
@@ -37,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
 
         if (savedPublicKey != null && savedPrivateKey != null) {
-            findViewById(R.id.generate_key_pair).setEnabled(false);
+            generateKeyPair.setEnabled(false);
         }
     }
 
@@ -54,6 +62,16 @@ public class MainActivity extends AppCompatActivity {
             rsaUtil.main(null);
         } catch (Exception e) {
             Log.i("Error_Message", e.getMessage());
+        }
+    }
+
+    public void view_private_key(View view) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
+
+        if (savedPrivateKey != null) {
+            textViewer.setText(savedPrivateKey);
         }
     }
 }

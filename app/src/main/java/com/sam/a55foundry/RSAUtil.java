@@ -27,27 +27,28 @@ public class RSAUtil {
     public void generateKeyPair() {
         try {
             rsaKeyPairGenerator = new RSAKeyPairGenerator();
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            String b64PublicKey = Base64.getEncoder().encodeToString(rsaKeyPairGenerator.getPublicKey().getEncoded());
+            editor.putString("PUBLIC_KEY", b64PublicKey);
+
+            String b64PrivateKey = Base64.getEncoder().encodeToString(rsaKeyPairGenerator.getPrivateKey().getEncoded());
+            editor.putString("PRIVATE_KEY", b64PrivateKey);
+            editor.commit();
+
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
 
     public  PublicKey getPublicKey() throws Exception{
-        String b64PublicKey = null;
-
-        if (rsaKeyPairGenerator != null)
-        b64PublicKey = Base64.getEncoder().encodeToString(rsaKeyPairGenerator.getPublicKey().getEncoded());
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String savedPublicKey = prefs.getString("PUBLIC_KEY", null);
+        String b64PublicKey = savedPublicKey;
 
-        if (savedPublicKey == null) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("PUBLIC_KEY", b64PublicKey);
-            editor.commit();
-        } else {
-            b64PublicKey = savedPublicKey;
-        }
 
         byte[] publicBytes = Base64.getDecoder().decode(b64PublicKey);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicBytes);
@@ -60,21 +61,9 @@ public class RSAUtil {
     }
 
     public  PrivateKey getPrivateKey() throws Exception{
-        String b64PrivateKey = null;
-
-        if (rsaKeyPairGenerator != null)
-            b64PrivateKey = Base64.getEncoder().encodeToString(rsaKeyPairGenerator.getPrivateKey().getEncoded());
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
-
-        if (savedPrivateKey == null) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("PRIVATE_KEY", b64PrivateKey);
-            editor.commit();
-        } else {
-            b64PrivateKey = savedPrivateKey;
-        }
+        String b64PrivateKey = savedPrivateKey;
 
         byte[] privateBytes = Base64.getDecoder().decode(b64PrivateKey);
 

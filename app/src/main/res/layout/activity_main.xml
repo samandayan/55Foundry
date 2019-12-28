@@ -12,13 +12,14 @@
         android:id="@+id/generate_key_pair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate Key Pair"
-        android:onClick="generate_key_pair"/>
+        android:onClick="generate_key_pair"
+        android:text="Generate Key Pair" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:onClick="view_private_key"
         android:text="View Private Key" />
 
     <Button
@@ -42,6 +43,7 @@
         android:text="Encrypt Text" />
 
     <EditText
+        android:id="@+id/text_viewer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
