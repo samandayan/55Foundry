@@ -9,9 +9,11 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/generate_key_pair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate Key Pair" />
+        android:text="Generate Key Pair"
+        android:onClick="generate_key_pair"/>
 
     <Button
         android:layout_width="wrap_content"

@@ -1,35 +1,59 @@
 package com.sam.a55foundry;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
-
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.interfaces.RSAPublicKey;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
-import java.util.Base64;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    RSAUtil rsaUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
+        rsaUtil = new RSAUtil(this);
+
+        /*try {
             RSAUtil rsaUtil = new RSAUtil(this);
             rsaUtil.main(null);
         } catch (Exception e) {
             Log.i("Error_Message", e.getMessage());
-        }
+        }*/
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String savedPublicKey = prefs.getString("PUBLIC_KEY", null);
+        String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
+
+        if (savedPublicKey != null && savedPrivateKey != null) {
+            findViewById(R.id.generate_key_pair).setEnabled(false);
+        }
+    }
+
+    public void generate_key_pair(View view) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String savedPublicKey = prefs.getString("PUBLIC_KEY", null);
+        String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
+
+        try {
+            if (savedPublicKey == null && savedPrivateKey == null)
+                rsaUtil.generateKeyPair();
+
+            rsaUtil.main(null);
+        } catch (Exception e) {
+            Log.i("Error_Message", e.getMessage());
+        }
     }
 }
