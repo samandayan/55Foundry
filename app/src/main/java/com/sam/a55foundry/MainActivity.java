@@ -71,7 +71,21 @@ public class MainActivity extends AppCompatActivity {
         String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
 
         if (savedPrivateKey != null) {
-            textViewer.setText(savedPrivateKey);
+            textViewer.setText("-----BEGIN PRIVATE KEY-----\n");
+            textViewer.append(savedPrivateKey);
+            textViewer.append("\n-----END PUBLIC KEY-----");
+        }
+    }
+
+    public void view_public_key(View view) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String savedPrivateKey = prefs.getString("PUBLIC_KEY", null);
+
+        if (savedPrivateKey != null) {
+            textViewer.setText("-----BEGIN PUBLIC KEY-----\n");
+            textViewer.append(savedPrivateKey);
+            textViewer.append("\n-----END PUBLIC KEY-----");
         }
     }
 }
