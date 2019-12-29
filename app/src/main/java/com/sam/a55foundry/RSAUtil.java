@@ -19,8 +19,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
-import static com.sam.a55foundry.RSAKeyPairGenerator.PUBLIC_KEY_TAG;
 import static com.sam.a55foundry.RSAKeyPairGenerator.PRIVATE_KEY_TAG;
+import static com.sam.a55foundry.RSAKeyPairGenerator.PUBLIC_KEY_TAG;
 
 public class RSAUtil {
 

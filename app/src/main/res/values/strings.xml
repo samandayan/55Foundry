@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">55Foundry</string>
+    <string name="generate_key_pair">Generate Key Pair</string>
+    <string name="view_private_key">View Private Key</string>
+    <string name="view_public_key">View Public Key</string>
+    <string name="text_to_encrypt">text to encrypt</string>
+    <string name="encrypt_text">Encrypt Text</string>
+    <string name="display_text_in_this_box">Display Text in this box</string>
 </resources>

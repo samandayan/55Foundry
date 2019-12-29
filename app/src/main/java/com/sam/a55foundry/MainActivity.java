@@ -11,8 +11,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.sam.a55foundry.RSAKeyPairGenerator.PUBLIC_KEY_TAG;
 import static com.sam.a55foundry.RSAKeyPairGenerator.PRIVATE_KEY_TAG;
+import static com.sam.a55foundry.RSAKeyPairGenerator.PUBLIC_KEY_TAG;
 
 public class MainActivity extends AppCompatActivity {
 
