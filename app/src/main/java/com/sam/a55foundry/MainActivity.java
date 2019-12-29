@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     RSAUtil rsaUtil;
 
     Button generateKeyPair;
+    Button view_public_key;
+    Button view_private_key;
     EditText textViewer;
     EditText text_to_encrypt;
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         generateKeyPair = findViewById(R.id.generate_key_pair);
         textViewer = findViewById(R.id.text_viewer);
         text_to_encrypt = findViewById(R.id.text_to_encrypt);
+        view_public_key = findViewById(R.id.view_public_key);
+        view_private_key = findViewById(R.id.view_private_key);
 
         rsaUtil = new RSAUtil(this);
 
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedPublicKey != null && savedPrivateKey != null) {
             generateKeyPair.setEnabled(false);
+            generateKeyPair.setBackground(getDrawable(R.drawable.button_disabled));
+            view_private_key.setBackground(getDrawable(R.drawable.button_enabled));
+            view_public_key.setBackground(getDrawable(R.drawable.button_enabled));
         }
     }
 
