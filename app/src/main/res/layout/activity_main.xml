@@ -78,6 +78,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/encrypt_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -85,6 +86,7 @@
         android:padding="8dp"
         android:text="Encrypt Text"
         android:textAllCaps="false"
+        android:onClick="perform_encryption"
         android:textColor="#4873FA" />
 
     <EditText

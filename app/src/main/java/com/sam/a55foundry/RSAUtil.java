@@ -92,15 +92,16 @@ public class RSAUtil {
         return decrypt(Base64.getDecoder().decode(data.getBytes()), getPrivateKey());
     }
 
-    public  void main(String[] args) throws IllegalBlockSizeException, InvalidKeyException, NoSuchPaddingException, BadPaddingException {
+    public String main(String textToEncrypt) throws IllegalBlockSizeException, InvalidKeyException, NoSuchPaddingException, BadPaddingException {
         try {
-            String encryptedString = Base64.getEncoder().encodeToString(encrypt("This is Sam Dayan"));
+            String encryptedString = Base64.getEncoder().encodeToString(encrypt(textToEncrypt));
             Log.i("asdf", encryptedString);
             String decryptedString = decrypt(encryptedString);
             Log.i("asdf", decryptedString);
+            return encryptedString;
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-
+        return null;
     }
 }

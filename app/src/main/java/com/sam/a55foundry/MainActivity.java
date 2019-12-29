@@ -3,11 +3,11 @@ package com.sam.a55foundry;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -68,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (savedPublicKey == null && savedPrivateKey == null)
                 rsaUtil.generateKeyPair();
-
-            rsaUtil.main(null);
         } catch (Exception e) {
             Log.i("Error_Message", e.getMessage());
         }
@@ -101,5 +99,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void clear_text_to_encrypt(View view) {
         text_to_encrypt.setText("");
+    }
+
+    public void perform_encryption(View view) {
+        String encrypted_text = null;
+        try {
+            if (!TextUtils.isEmpty(text_to_encrypt.getText().toString()))
+                encrypted_text = rsaUtil.main(text_to_encrypt.getText().toString());
+
+            if (!TextUtils.isEmpty(encrypted_text))
+                textViewer.setText(encrypted_text);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
