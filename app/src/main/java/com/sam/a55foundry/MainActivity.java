@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -96,5 +97,9 @@ public class MainActivity extends AppCompatActivity {
             textViewer.append(savedPrivateKey);
             textViewer.append("\n-----END PUBLIC KEY-----");
         }
+    }
+
+    public void clear_text_to_encrypt(View view) {
+        text_to_encrypt.setText("");
     }
 }
