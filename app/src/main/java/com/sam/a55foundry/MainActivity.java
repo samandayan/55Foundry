@@ -33,7 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         rsaUtil = new RSAUtil(this);
     }
-    
+
+    /**
+     * This method find references to all the
+     * views for later processing and modifications.
+     */
     public void bindViews() {
         generateKeyPair = findViewById(R.id.generate_key_pair);
         textViewer = findViewById(R.id.text_viewer);
@@ -42,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
         view_private_key = findViewById(R.id.view_private_key);
     }
 
+    /**
+     * Per project requirement this is added here
+     * so that after the App is restarted the
+     * Generate Key Pair button gets disabled.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -59,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view The Generate Key Pair Button
+     *             This method generates the
+     *             RSA Key Pair.
+     */
     public void generate_key_pair(View view) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -66,13 +81,22 @@ public class MainActivity extends AppCompatActivity {
         String savedPrivateKey = prefs.getString(PRIVATE_KEY_TAG, null);
 
         try {
-            if (savedPublicKey == null && savedPrivateKey == null)
+            if (savedPublicKey == null && savedPrivateKey == null) {
                 rsaUtil.generateKeyPair();
+                view_private_key.setBackground(getDrawable(R.drawable.button_enabled));
+                view_public_key.setBackground(getDrawable(R.drawable.button_enabled));
+            }
         } catch (Exception e) {
             Log.i("Error_Message", e.getMessage());
         }
     }
 
+    /**
+     *
+     * @param view The View Private Key Button
+     *             This button displays the
+     *             private key.
+     */
     public void view_private_key(View view) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -85,6 +109,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view The View Public Key Button
+     *             This button displays the
+     *             public key.
+     */
     public void view_public_key(View view) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -97,10 +127,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view The ImageView that clear text to encrypt
+     *             This is the icon that sits to the right
+     *             of text to encrypt EditText. Upon
+     *             clicking this button the encrypt EditText
+     *             will be cleared of its textual contents.
+     */
     public void clear_text_to_encrypt(View view) {
         text_to_encrypt.setText("");
     }
 
+    /**
+     *
+     * @param view Encrypt Text Button
+     *             This button will have
+     *             the text encrypted and
+     *             will then display the
+     *             encrypted text.
+     */
     public void perform_encryption(View view) {
         String encrypted_text = null;
         try {
