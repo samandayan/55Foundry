@@ -11,6 +11,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.sam.a55foundry.RSAKeyPairGenerator.PUBLIC_KEY_TAG;
+import static com.sam.a55foundry.RSAKeyPairGenerator.PRIVATE_KEY_TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     RSAUtil rsaUtil;
@@ -26,20 +29,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bindViews();
+
+        rsaUtil = new RSAUtil(this);
+    }
+    
+    public void bindViews() {
         generateKeyPair = findViewById(R.id.generate_key_pair);
         textViewer = findViewById(R.id.text_viewer);
         text_to_encrypt = findViewById(R.id.text_to_encrypt);
         view_public_key = findViewById(R.id.view_public_key);
         view_private_key = findViewById(R.id.view_private_key);
-
-        rsaUtil = new RSAUtil(this);
-
-        /*try {
-            RSAUtil rsaUtil = new RSAUtil(this);
-            rsaUtil.main(null);
-        } catch (Exception e) {
-            Log.i("Error_Message", e.getMessage());
-        }*/
     }
 
     @Override
@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String savedPublicKey = prefs.getString("PUBLIC_KEY", null);
-        String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
+        String savedPublicKey = prefs.getString(PUBLIC_KEY_TAG, null);
+        String savedPrivateKey = prefs.getString(PRIVATE_KEY_TAG, null);
 
         if (savedPublicKey != null && savedPrivateKey != null) {
             generateKeyPair.setEnabled(false);
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public void generate_key_pair(View view) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String savedPublicKey = prefs.getString("PUBLIC_KEY", null);
-        String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
+        String savedPublicKey = prefs.getString(PUBLIC_KEY_TAG, null);
+        String savedPrivateKey = prefs.getString(PRIVATE_KEY_TAG, null);
 
         try {
             if (savedPublicKey == null && savedPrivateKey == null)
@@ -76,19 +76,19 @@ public class MainActivity extends AppCompatActivity {
     public void view_private_key(View view) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String savedPrivateKey = prefs.getString("PRIVATE_KEY", null);
+        String savedPrivateKey = prefs.getString(PRIVATE_KEY_TAG, null);
 
         if (savedPrivateKey != null) {
             textViewer.setText("-----BEGIN PRIVATE KEY-----\n");
             textViewer.append(savedPrivateKey);
-            textViewer.append("\n-----END PUBLIC KEY-----");
+            textViewer.append("\n-----END PRIVATE KEY-----");
         }
     }
 
     public void view_public_key(View view) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String savedPrivateKey = prefs.getString("PUBLIC_KEY", null);
+        String savedPrivateKey = prefs.getString(PUBLIC_KEY_TAG, null);
 
         if (savedPrivateKey != null) {
             textViewer.setText("-----BEGIN PUBLIC KEY-----\n");

@@ -1,12 +1,15 @@
 package com.sam.a55foundry;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.*;
-import java.util.Base64;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 public class RSAKeyPairGenerator {
+
+    public static final String PUBLIC_KEY_TAG = "PUBLIC_KEY";
+    public static final String PRIVATE_KEY_TAG = "PRIVATE_KEY";
 
     private PrivateKey privateKey;
     private PublicKey publicKey;
