@@ -26,8 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="View Public Key"
-        android:onClick="view_public_key"/>
+        android:onClick="view_public_key"
+        android:text="View Public Key" />
 
     <EditText
         android:id="@+id/text_to_encrypt"
@@ -36,8 +36,7 @@
         android:layout_marginTop="4dp"
         android:hint="text to encrypt"
         android:lines="4"
-        android:maxLength="60"
-        android:drawableEnd="@android:drawable/ic_delete" />
+        android:maxLength="60" />
 
     <Button
         android:layout_width="wrap_content"
